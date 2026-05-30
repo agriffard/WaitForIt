@@ -6,19 +6,17 @@
 
 <p>The component keeps loading, success, and error states in one place.</p>
 
-<button class="btn btn-secondary mb-3" @onclick="ToggleFailure">
-    Simulate @(_simulateFailure ? "success" : "error")
-</button>
+<button @onclick="ToggleFailure">Simulate @(_simulateFailure ? "success" : "error")</button>
 
 <WaitForIt TData="SampleData" Operation="@LoadData" @key="_reloadKey" Context="data">
     <Loading>
-        <p class="text-muted">Loading sample data…</p>
+        <p>Loading sample data…</p>
     </Loading>
     <Loaded>
-        <div class="alert alert-success">Loaded: @data.Name</div>
+        <p>Loaded: @data.Name</p>
     </Loaded>
     <Error Context="ex">
-        <div class="alert alert-danger">Error: @ex.Message</div>
+        <p>Error: @ex.Message</p>
     </Error>
 </WaitForIt>
 
