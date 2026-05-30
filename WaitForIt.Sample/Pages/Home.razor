@@ -1,0 +1,48 @@
+﻿@page "/"
+
+<PageTitle>WaitForIt sample</PageTitle>
+
+<h1>WaitForIt sample</h1>
+
+<p>The component keeps loading, success, and error states in one place.</p>
+
+<button class="btn btn-secondary mb-3" @onclick="ToggleFailure">
+    Simulate @(_simulateFailure ? "success" : "error")
+</button>
+
+<WaitForIt TData="SampleData" Operation="@LoadData" @key="_reloadKey" Context="data">
+    <Loading>
+        <p class="text-muted">Loading sample data…</p>
+    </Loading>
+    <Loaded>
+        <div class="alert alert-success">Loaded: @data.Name</div>
+    </Loaded>
+    <Error Context="ex">
+        <div class="alert alert-danger">Error: @ex.Message</div>
+    </Error>
+</WaitForIt>
+
+@code {
+    private bool _simulateFailure;
+    private int _reloadKey;
+
+    private async Task<SampleData> LoadData()
+    {
+        await Task.Delay(500);
+
+        if (_simulateFailure)
+        {
+            throw new InvalidOperationException("Demo failure");
+        }
+
+        return new SampleData($"Data loaded at {DateTime.Now:T}");
+    }
+
+    private void ToggleFailure()
+    {
+        _simulateFailure = !_simulateFailure;
+        _reloadKey++;
+    }
+
+    private sealed record SampleData(string Name);
+}
