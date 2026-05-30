@@ -31,7 +31,7 @@ A sample Blazor WebAssembly app is in `/WaitForIt.Sample` and demonstrates both 
 Run locally:
 
 ```bash
-dotnet run --project /tmp/workspace/agriffard/WaitForIt/WaitForIt.Sample/WaitForIt.Sample.csproj
+dotnet run --project WaitForIt.Sample/WaitForIt.Sample.csproj
 ```
 
 ## Docs
