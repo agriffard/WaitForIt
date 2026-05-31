@@ -1,0 +1,88 @@
+@typeparam TData
+
+@if (_state == LoadState.Loading)
+{
+    if (Loading is not null)
+    {
+        @Loading
+    }
+    else
+    {
+        <span>Loading...</span>
+    }
+}
+else if (_state == LoadState.Loaded)
+{
+    if (Loaded is not null)
+    {
+        @Loaded(_result)
+    }
+}
+else if (_error is not null)
+{
+    if (Error is not null)
+    {
+        @Error(_error)
+    }
+    else
+    {
+        <span>@_error.Message</span>
+    }
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public Func<Task<TData>>? Operation { get; set; }
+
+    [Parameter]
+    public RenderFragment? Loading { get; set; }
+
+    [Parameter]
+    public RenderFragment<TData>? Loaded { get; set; }
+
+    [Parameter]
+    public RenderFragment<Exception>? Error { get; set; }
+
+    private Func<Task<TData>>? _lastOperation;
+    private TData _result = default!;
+    private Exception? _error;
+    private LoadState _state = LoadState.Loading;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Operation is null)
+        {
+            throw new InvalidOperationException($"{nameof(WaitForIt<TData>)} requires the {nameof(Operation)} parameter.");
+        }
+
+        if (!ReferenceEquals(_lastOperation, Operation))
+        {
+            _lastOperation = Operation;
+            await ExecuteAsync();
+        }
+    }
+
+    private async Task ExecuteAsync()
+    {
+        _state = LoadState.Loading;
+        _error = null;
+
+        try
+        {
+            _result = await Operation!();
+            _state = LoadState.Loaded;
+        }
+        catch (Exception exception)
+        {
+            _error = exception;
+            _state = LoadState.Failed;
+        }
+    }
+
+    private enum LoadState
+    {
+        Loading,
+        Loaded,
+        Failed
+    }
+}
