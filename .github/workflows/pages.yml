@@ -31,7 +31,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Publish sample
-        run: dotnet publish WaitForIt.Sample/WaitForIt.Sample.csproj --configuration Release --output ./publish
+        run: dotnet publish samples/WaitForIt.Sample/WaitForIt.Sample.csproj --configuration Release --output ./publish
 
       - name: Set base href for GitHub Pages
         run: sed -i 's#<base href="/" />#<base href="/${{ github.event.repository.name }}/" />#g' ./publish/wwwroot/index.html

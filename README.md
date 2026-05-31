@@ -26,12 +26,12 @@ dotnet add package WaitForIt
 
 ## Sample app
 
-A sample Blazor WebAssembly app is in `/WaitForIt.Sample` and demonstrates both success and error states.
+A sample Blazor WebAssembly app is in `/samples/WaitForIt.Sample` and demonstrates both success and error states.
 
 Run locally:
 
 ```bash
-dotnet run --project WaitForIt.Sample/WaitForIt.Sample.csproj
+dotnet run --project samples/WaitForIt.Sample/WaitForIt.Sample.csproj
 ```
 
 ## Docs

@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="WaitForIt.Sample/WaitForIt.Sample.csproj" />
-  <Project Path="WaitForIt.Tests/WaitForIt.Tests.csproj" />
-  <Project Path="WaitForIt/WaitForIt.csproj" />
+  <Project Path="samples/WaitForIt.Sample/WaitForIt.Sample.csproj" />
+  <Project Path="tests/WaitForIt.Tests/WaitForIt.Tests.csproj" />
+  <Project Path="src/WaitForIt/WaitForIt.csproj" />
 </Solution>

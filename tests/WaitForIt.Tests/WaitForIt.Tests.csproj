@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WaitForIt\WaitForIt.csproj" />
+    <ProjectReference Include="..\..\src\WaitForIt\WaitForIt.csproj" />
   </ItemGroup>
 
 </Project>

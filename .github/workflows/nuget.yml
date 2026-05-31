@@ -25,7 +25,7 @@ jobs:
         run: dotnet restore
 
       - name: Pack
-        run: dotnet pack WaitForIt/WaitForIt.csproj --configuration Release --no-restore --output ./artifacts
+        run: dotnet pack src/WaitForIt/WaitForIt.csproj --configuration Release --no-restore --output ./artifacts
 
       - name: Push package
         run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
